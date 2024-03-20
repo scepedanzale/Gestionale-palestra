@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+
+class Course_User extends Pivot
+{
+    use HasFactory;
+
+    protected $table = 'course_user'; // Nome della tabella pivot
+    protected $fillable = ['day', 'start_time']; // Campi aggiuntivi
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
+}

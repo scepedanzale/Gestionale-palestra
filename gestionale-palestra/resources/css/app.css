@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+nav, .main{
+    background-color: #ffca0c;
+}
+
+.yw{
+    color: #c99e04;
+}
