@@ -4,7 +4,12 @@
             <h1 class="fs-1 fw-bolder uppercase">
                 {{ __('Tutti i Corsi') }}
             </h1>
-            <a href="/bookings" class="btn btn-outline-dark">I tuoi corsi</a>
+            @if(Auth::user()->admin===1)
+                <a href="/courses/create" class="btn btn-outline-dark">Aggiungi nuovo corso</a>
+            @else
+                <a href="/bookings" class="btn btn-outline-dark">I tuoi corsi</a>
+            @endif
+
         </div>
 
     </x-slot>

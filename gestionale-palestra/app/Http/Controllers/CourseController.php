@@ -6,6 +6,7 @@ use App\Models\Course;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -23,7 +24,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('newcourse');
     }
 
     /**
@@ -31,7 +32,15 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->only(['name', 'description', 'price']);
+        $data['created_at'] = Carbon::now();
+        $query = DB::table('courses');
+        $query->insert($data);
+        if($query){
+            return redirect()->action([CourseController::class, 'index']);
+        }else{
+            return 'Errore inserimento record';
+        }
     }
 
     /**
