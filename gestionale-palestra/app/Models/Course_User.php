@@ -14,7 +14,7 @@ class Course_User extends Pivot
     protected $fillable = ['day', 'start_time']; // Campi aggiuntivi
 
     public function course()
-    {
-        return $this->belongsTo(Course::class, 'course_id');
-    }
+{
+    return $this->belongsTo(Course::class);
+}
 }

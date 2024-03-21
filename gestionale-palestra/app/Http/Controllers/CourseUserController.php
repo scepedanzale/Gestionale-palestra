@@ -16,7 +16,6 @@ class CourseUserController extends Controller
      */
     public function index()
     {
-
         return view('bookings');
     }
 
@@ -47,8 +46,7 @@ class CourseUserController extends Controller
      */
     public function show(int $id)
     {
-        $corso = Course::findOrFail($id);
-        $corso_user = Auth::user()->courses->where('id', '=', $corso->id)->first();
+        $corso_user = Course_User::with('course')->findOrFail($id);
         return view('bookingdetail', ['corso' => $corso_user]);
     }
 

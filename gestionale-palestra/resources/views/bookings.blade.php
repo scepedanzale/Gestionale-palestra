@@ -27,7 +27,7 @@
                                     @elseif($corso->pivot->state==='Erased')
                                         <span><i>Domanda cancellata</i></span>
                                     @endif
-                                    <a href="/bookings/{{$corso->id}}" class="btn btn-outline-dark">Dettaglio</a>
+                                    <a href="/bookings/{{$corso->pivot->id}}" class="btn btn-outline-dark">Dettaglio</a>
                                 </li>
                             @endforeach
                         </ul>
