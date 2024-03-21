@@ -53,9 +53,13 @@ class CourseUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CourseUser $course_User)
+    public function edit(int $id)
     {
-        //
+        $corso_user = CourseUser::with('course')->findOrFail($id);
+        if(Auth::user()->admin === 1){
+            return view('editbooking', ['booking' => $corso_user]);
+        }
+        return redirect()->action([CourseController::class, 'index']);
     }
 
     /**
@@ -67,7 +71,13 @@ class CourseUserController extends Controller
         $corso_user['day'] = $request->day;
         $corso_user['start_time'] = $request->start_time;
         $corso_user['state'] = $request->state;
-        $corso_user['created_at'] = Carbon::now();
+        if($request->created_at){
+            $corso_user['created_at'] = $request->created_at;
+            $corso_user['updated_at'] = Carbon::now();
+        }else{
+            $corso_user['created_at'] = Carbon::now();
+        }
+
         $corso_user->update();
         return redirect('/bookings/'. $request->id);
     }

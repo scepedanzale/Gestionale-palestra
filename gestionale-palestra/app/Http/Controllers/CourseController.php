@@ -24,7 +24,10 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('newcourse');
+        if(Auth::user()->admin===1){
+            return view('newcourse');
+        }
+        return redirect('/courses');
     }
 
     /**

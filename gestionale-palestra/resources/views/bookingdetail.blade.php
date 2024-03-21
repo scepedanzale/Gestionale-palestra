@@ -35,12 +35,16 @@
                         </p>
                     </div>
                     <div class="mb-4 d-flex gap-3">
+                        <!-- cancella iscrizione -->
                         <form action="/bookings/{{$booking->id}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-outline-danger">Cancella Iscrizione</button>
                         </form>
                         @if(Auth::user()->admin)
+                        <!-- modifica iscrizione -->
+                                <a href="/bookings/{{$booking->id}}/edit" class="btn btn-outline-dark">Modifica Iscrizione</a>
+                        <!-- approvazione domanda -->
                                 <form action="/bookings/{{$booking->id}}" method="post">
                                     @csrf
                                     @method('PATCH')
@@ -65,6 +69,7 @@
                                    
                                     </button>
                                 </form>
+                        <!-- rifiuta domanda di iscrizione -->
                                 <form action="/bookings/{{$booking->id}}" method="post">
                                     @csrf
                                     @method('PATCH')
