@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\Course_User;
+use App\Models\CourseUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,14 +46,14 @@ class CourseUserController extends Controller
      */
     public function show(int $id)
     {
-        $corso_user = Course_User::with('course')->findOrFail($id);
-        return view('bookingdetail', ['corso' => $corso_user]);
+        $corso_user = CourseUser::with('course')->findOrFail($id);
+        return view('bookingdetail', ['booking' => $corso_user]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course_User $course_User)
+    public function edit(CourseUser $course_User)
     {
         //
     }
@@ -61,9 +61,15 @@ class CourseUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course_User $course_User)
+    public function update(Request $request)
     {
-        //
+        $corso_user = CourseUser::findOrFail($request->id);
+        $corso_user['day'] = $request->day;
+        $corso_user['start_time'] = $request->start_time;
+        $corso_user['state'] = $request->state;
+        $corso_user['created_at'] = Carbon::now();
+        $corso_user->update();
+        return redirect('/bookings/'. $request->id);
     }
 
     /**
@@ -71,7 +77,7 @@ class CourseUserController extends Controller
      */
     public function destroy($id)
     {
-        $course_user = Course_User::findOrFail($id);
+        $course_user = CourseUser::findOrFail($id);
         $course_user->delete();
         return redirect('/bookings');
     }
