@@ -44,31 +44,3 @@ class UserFactory extends Factory
         ]);
     }
 }
-
-
-/*
- $days = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
-
-        return [
-            'user_id' => User::get()->random()->id,
-            'course_id' => Course::get()->random()->id,
-            'day' => fake()->randomElement($days),
-            'start_time' =>  fake()->dateTimeBetween('08:00', '19:00')->format('H:00'),
-            'state' => 'Pending'
-        ];
-
-
-        Schema::create('user_courses', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('day');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->string('state');
-            $table->timestamps();
-        });
-
-*/

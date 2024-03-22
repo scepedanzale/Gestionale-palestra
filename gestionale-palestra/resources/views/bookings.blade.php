@@ -11,7 +11,7 @@
     <div class="py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if(Auth::user()->admin)
-                <div class="bg-white d-flex justify-content-center gap-3 mb-3 py-2">
+                <div class="bg-white d-flex justify-content-center sticky-top gap-3 mb-3 py-2">
                     <a href="#in-attesa" class="btn btn-outline-dark">IN ATTESA</a>
                     <a href="#approved" class="btn btn-outline-dark">APPROVATE</a>
                     <a href="#rejected" class="btn btn-outline-dark">RIFIUTATE</a>
@@ -66,10 +66,8 @@
                                             <span><i>In attesa di approvazione...</i></span>
                                         @elseif($corso->pivot->state==='Approved')
                                             <span><i>Iscritto</i></span>
-                                        @elseif($corso->pivot->state==='Reject')
+                                        @elseif($corso->pivot->state==='Rejected')
                                             <span><i>Domanda rifiutata</i></span>
-                                        @elseif($corso->pivot->state==='Erased')
-                                            <span><i>Domanda cancellata</i></span>
                                         @endif
                                         <a href="/bookings/{{$corso->pivot->id}}" class="btn btn-outline-dark">Dettaglio</a>
                                     </li>
