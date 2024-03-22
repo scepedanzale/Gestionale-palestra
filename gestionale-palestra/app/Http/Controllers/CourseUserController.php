@@ -16,7 +16,8 @@ class CourseUserController extends Controller
      */
     public function index()
     {
-        return view('bookings');
+        $bookings = CourseUser::get();
+        return view('bookings', ['bookings' => $bookings]);
     }
 
     /**

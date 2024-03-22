@@ -13,13 +13,26 @@
             <div class="bg-white overflow-hidden shadow sm:rounded-lg">
 
                 <div class="p-6 text-gray-900">
+
+                    <!-- informazioni utente -->
+                    @if(Auth::user()->admin)
+                        <div class="mb-4">
+                            <h3 class="fs-2 mb-2">Info Utente</h3>
+                            <p><b>Nome corso:</b> {{$booking->user->firstname}} {{$booking->user->lastname}}</p>
+                            <p><b>Email:</b> {{$booking->user->email}}</p>
+                            <p><b>Data di iscrizione:</b> €{{$booking->user->created_at}}</p>
+                        </div>
+                    @endif
+
+                    <!-- informazioni corso -->
                     <div class="mb-4">
                         <h3 class="fs-2 mb-2">Info Corso</h3>
                         <p><b>Nome corso:</b> {{$booking->course->name}}</p>
                         <p><b>Descrizione:</b> {{$booking->course->description}}</p>
                         <p><b>Prezzo:</b> €{{$booking->course->price}}</p>
-
                     </div>
+
+                    <!-- informazioni iscrizione -->
                     <div class="mb-4">
                         <h3 class="fs-2 mb-2">Info Iscrizione</h3>
                         <p><b>Giorno di partecipazione:</b> {{$booking->day}}</p>
@@ -34,6 +47,7 @@
                             @endif
                         </p>
                     </div>
+
                     <div class="mb-4 d-flex gap-3">
                         <!-- cancella iscrizione -->
                         <form action="/bookings/{{$booking->id}}" method="post">
@@ -52,7 +66,7 @@
                                     <input type="hidden" value="{{$booking->id}}" name="id">
                                     <input type="hidden" value="{{$booking->day}}" name="day">
                                     <input type="hidden" value="{{$booking->start_time}}" name="start_time">
-                                    <button class="btn btn-outline-success 
+                                    <button class="btn btn-outline-success
                                         @if($booking->state==='Approved')
                                             disabled
                                         @elseif($booking->state==='Rejected')
@@ -65,8 +79,8 @@
                                             Approva Domanda
                                         @elseif($booking->state=='Approved')
                                             Domanda Approvata
-                                        @endif  
-                                   
+                                        @endif
+
                                     </button>
                                 </form>
                         <!-- rifiuta domanda di iscrizione -->
@@ -77,7 +91,7 @@
                                     <input type="hidden" value="{{$booking->id}}" name="id">
                                     <input type="hidden" value="{{$booking->day}}" name="day">
                                     <input type="hidden" value="{{$booking->start_time}}" name="start_time">
-                                    <button class="btn btn-outline-dark 
+                                    <button class="btn btn-outline-dark
                                         @if($booking->state==='Approved')
                                             d-none
                                         @elseif($booking->state==='Rejected')
@@ -91,7 +105,7 @@
                                         @elseif($booking->state=='Rejected')
                                             Domanda Rifiutata
                                         @endif
-                                   
+
                                     </button>
                                 </form>
                         @endif
